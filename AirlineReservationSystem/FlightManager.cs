@@ -33,12 +33,22 @@ namespace AirlineReservationSystem
             ds = db.ExecuteSQLStatement(sql, ref rows);
 
             //Show the data
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                int id = 0;
+                string flightNumber = String.Empty;
+                string aircraftType = String.Empty;
 
+                id = (int)row.ItemArray[0];
+                flightNumber = (string)row.ItemArray[1];
+                aircraftType = (string)row.ItemArray[2];
+
+                Flight flight = new Flight(id, flightNumber, aircraftType);
+                Flights.Add(flight);
+            }
 
             // Loop through DataSet, for each Row, Create a new Flight, fill it up, add it to the list
             return Flights;
-
-
         }
     }
 }

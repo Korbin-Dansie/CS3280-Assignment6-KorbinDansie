@@ -21,7 +21,7 @@ namespace AirlineReservationSystem.Resources
         /// </summary>
 		public clsDataAccess()
         {
-            sConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data source= " + Directory.GetCurrentDirectory() + @"Resources\DataBase\ReservationSystem.mdb";
+            sConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data source= " + Directory.GetCurrentDirectory() + @"\Resources\DataBase\ReservationSystem.mdb";
         }
 
         /// <summary>

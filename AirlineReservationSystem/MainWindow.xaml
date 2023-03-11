@@ -347,7 +347,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Padding" Value="20,1,20,1"/>
-            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
             <Setter Property="Width" Value="162"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -402,6 +402,29 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="LabelStyleSeats" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="Snow"/>
+            <Setter Property="Background" Value="Blue"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Window.Background>
         <SolidColorBrush Color="#FFB5B5B5"/>
@@ -436,18 +459,18 @@
                 <Rectangle x:Name="rectSeat" Grid.Column="1" Grid.Row="2" Stroke="Black" Width="{Binding ActualHeight, ElementName=rectSeat, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=lbPassengersSeat, Mode=OneWay}"/>
             </Grid>
         </GroupBox>
-        <Grid x:Name="gControls" Grid.Column="1" Grid.Row="1">
+        <Grid x:Name="gControls" Grid.Column="1" Grid.Row="1" Margin="15,0,15,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnChangeSeat" Content="Change Seat" Style="{DynamicResource ButtonStyleControls}"/>
-            <Button x:Name="btnAddPassenger" Content="Add Passenger" Grid.Row="1" Style="{DynamicResource ButtonStyleControls}"/>
-            <Button x:Name="btnDeletePassenger" Grid.Column="1" Content="Delete Passenger" Grid.Row="1" Style="{DynamicResource ButtonStyleControls}"/>
+            <Button x:Name="btnChangeSeat" Content="Change Seat" Style="{DynamicResource ButtonStyleControls}" Height="26" Width="162"/>
+            <Button x:Name="btnAddPassenger" Content="Add Passenger" Style="{DynamicResource ButtonStyleControls}" Height="25" Width="162" Grid.Row="1"/>
+            <Button x:Name="btnDeletePassenger" Grid.Column="2" Content="Delete Passenger" Grid.Row="1" Style="{DynamicResource ButtonStyleControls}" Height="25" Width="162"/>
         </Grid>
         <GroupBox x:Name="gbColorKey" Grid.Column="1" Header="Color Key" Grid.Row="2" Margin="{DynamicResource GroupBoxMargin1}">
             <Grid x:Name="gColorKey">
@@ -468,6 +491,48 @@
                 <Label x:Name="lbSeatSelected" Grid.Column="1" Content="Seat Selected" Grid.Row="2" Style="{DynamicResource LabelStyleColorkey}"/>
             </Grid>
         </GroupBox>
+        <Canvas x:Name="c767" Grid.RowSpan="3">
+            <Label x:Name="lbFlightTitle_767" Content="767" Canvas.Left="182" Canvas.Top="15" HorizontalAlignment="Left"/>
+            <Canvas x:Name="c767Seats" Height="388" Width="400" HorizontalAlignment="Center" Canvas.Top="46" VerticalAlignment="Top">
+                <Label x:Name="Seat1" Content="1" Canvas.Left="88" Canvas.Top="10" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label x:Name="Seat2" Content="2" Canvas.Left="146" Canvas.Top="10" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label x:Name="Seat3" Content="3" Canvas.Left="204" Canvas.Top="10" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label x:Name="Seat4" Content="4" Canvas.Left="262" Canvas.Top="10" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label x:Name="Seat5" Content="5" Canvas.Left="88" Canvas.Top="68" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat6" Content="6" Canvas.Left="146" Canvas.Top="68" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat7" Content="7" Canvas.Left="204" Canvas.Top="68" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat8" Content="8" Canvas.Left="262" Canvas.Top="68" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat9" Content="9" Canvas.Left="88" Canvas.Top="126" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat10" Content="10" Canvas.Left="146" Canvas.Top="126" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat11" Content="11" Canvas.Left="204" Canvas.Top="126" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat12" Content="12" Canvas.Left="262" Canvas.Top="126" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat13" Content="13" Canvas.Left="88" Canvas.Top="184" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat14" Content="14" Canvas.Left="146" Canvas.Top="184" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat15" Content="15" Canvas.Left="204" Canvas.Top="184" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="Seat16" Content="16" Canvas.Left="262" Canvas.Top="184" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="c380" Grid.RowSpan="3" Visibility="Collapsed">
+            <Label x:Name="lbFlightTitle_380" Content="A380" Canvas.Left="182" Canvas.Top="15" HorizontalAlignment="Left"/>
+            <Canvas x:Name="cA380Seats" Height="388" Width="400" HorizontalAlignment="Center" Canvas.Top="46" VerticalAlignment="Top">
+                <Label x:Name="SeatA1" Content="1" Canvas.Left="88" Canvas.Top="10" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label x:Name="SeatA2" Content="2" Canvas.Left="146" Canvas.Top="10" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label x:Name="SeatA3" Content="3" Canvas.Left="204" Canvas.Top="10" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label x:Name="SeatA4" Content="4" Canvas.Left="262" Canvas.Top="10" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label x:Name="SeatA5" Content="5" Canvas.Left="88" Canvas.Top="68" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA6" Content="6" Canvas.Left="146" Canvas.Top="68" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA7" Content="7" Canvas.Left="204" Canvas.Top="68" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA8" Content="8" Canvas.Left="262" Canvas.Top="68" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA9" Content="9" Canvas.Left="88" Canvas.Top="126" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA10" Content="10" Canvas.Left="146" Canvas.Top="126" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA11" Content="11" Canvas.Left="204" Canvas.Top="126" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA12" Content="12" Canvas.Left="262" Canvas.Top="126" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA13" Content="13" Canvas.Left="88" Canvas.Top="184" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA14" Content="14" Canvas.Left="146" Canvas.Top="184" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA15" Content="15" Canvas.Left="204" Canvas.Top="184" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Label x:Name="SeatA16" Content="16" Canvas.Left="262" Canvas.Top="184" Style="{DynamicResource LabelStyleSeats}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+            </Canvas>
+        </Canvas>
 
     </Grid>
 </Window>

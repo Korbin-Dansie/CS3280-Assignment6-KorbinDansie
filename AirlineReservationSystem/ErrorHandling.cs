@@ -35,7 +35,10 @@ namespace AirlineReservationSystem
 
         public static void throwError(string declaringType, string name, string message)
         {
-            if(declaringType == null)
+            /*
+             MethodInfo.GetCurrentMethod().DeclaringType.Name.ToString(), MethodInfo.GetCurrentMethod().Name, ex.Message
+            */
+            if (declaringType == null)
             {
                 declaringType = String.Empty;
             }

@@ -116,7 +116,7 @@ namespace AirlineReservationSystem
             }
             catch(Exception ex)
             {
-                ErrorHandling.throwError(ex);
+                ErrorHandling.throwError(MethodInfo.GetCurrentMethod().DeclaringType.Name.ToString(), MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
         /// <summary>

@@ -34,24 +34,32 @@ namespace AirlineReservationSystem
 
         public MainWindow()
         {
-            InitializeComponent();
-            // Disable UI
-            toggleUIComponents(false);
+            try
+            {
+                InitializeComponent();
+                // Disable UI
+                toggleUIComponents(false);
 
-            db = new clsDataAccess();
+                db = new clsDataAccess();
 
-            // Get the flights from the data base
-            flightManager = new FlightManager(db);
+                // Get the flights from the data base
+                flightManager = new FlightManager(db);
 
-            // Hide both canvases until user choosies one
-            c380.Visibility = Visibility.Collapsed;
-            c767.Visibility = Visibility.Collapsed;
+                // Hide both canvases until user choosies one
+                c380.Visibility = Visibility.Collapsed;
+                c767.Visibility = Visibility.Collapsed;
 
 
-            // Load the flights into the combobox
-            cbFlight.ItemsSource = flightManager.getFlights();
+                // Load the flights into the combobox
+                cbFlight.Items.Clear();
+                cbFlight.ItemsSource = flightManager.getFlights();
 
-            // Set the selected item equal to the one currently displayed
+                // Set the selected item equal to the one currently displayed
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.handelError(MethodInfo.GetCurrentMethod(), ex);
+            }
         }
 
         /// <summary>
@@ -60,17 +68,25 @@ namespace AirlineReservationSystem
         /// <param name="is767Visible"></param>
         private void toggleFlightCanvases(bool is767Visible)
         {
-            if (is767Visible)
+            try
             {
-                c380.Visibility = Visibility.Collapsed;
-                c767.Visibility = Visibility.Visible;
+                if (is767Visible)
+                {
+                    c380.Visibility = Visibility.Collapsed;
+                    c767.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    c380.Visibility = Visibility.Visible;
+                    c767.Visibility = Visibility.Collapsed;
+                }
+                toggleUIComponents(true);
             }
-            else
+            catch(Exception ex)
             {
-                c380.Visibility = Visibility.Visible;
-                c767.Visibility = Visibility.Collapsed;
+                ErrorHandling.throwError(MethodInfo.GetCurrentMethod(), ex);
             }
-            toggleUIComponents(true);
+
         }
 
         /// <summary>
@@ -80,56 +96,59 @@ namespace AirlineReservationSystem
         /// <param name="e"></param>
         private void cbFlight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Flight? flight = cbFlight.SelectedItem as Flight;
-
-            // If flight is null exit
-            if(flight == null)
-            {
-                return;
-            }
-
-            if(flight.AircraftType == "Boeing 767")
-            {
-                toggleFlightCanvases(true);
-            }
-            else
-            {
-                toggleFlightCanvases(false);
-            }
-
             try
             {
-                throwError();
+                Flight? flight = cbFlight.SelectedItem as Flight;
+
+                // If flight is null exit
+                if (flight == null)
+                {
+                    return;
+                }
+
+                // Display the correct canvas
+                if (flight.AircraftType == "Boeing 767")
+                {
+                    toggleFlightCanvases(true);
+                }
+                else
+                {
+                    toggleFlightCanvases(false);
+                }
+
+                // Fill in the passanger combo box
+                PassengerManager passengers = new PassengerManager(db);
+                passengers.GetPassengers(flight.FlightId);
+
+                // Add the passangers to the combo box
+                cbPassenger.ItemsSource = passengers.Passengers;
+
             }
             catch(Exception ex)
             {
-                ErrorHandling.handelError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+                ErrorHandling.handelError(MethodInfo.GetCurrentMethod(), ex);
             }
         }
 
-        private void throwError()
-        {
-            try
-            {
-                Passenger p = new Passenger();
-                p.throwError();
-            }
-            catch(Exception ex)
-            {
-                ErrorHandling.throwError(MethodInfo.GetCurrentMethod().DeclaringType.Name.ToString(), MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }
-        }
         /// <summary>
         /// Toggle enable on all UI components exept for choose flight
         /// </summary>
         /// <param name="isEnabled"></param>
         private void toggleUIComponents(bool isEnabled)
         {
-            cbPassenger.IsEnabled = isEnabled;
+            try
+            {
+                cbPassenger.IsEnabled = isEnabled;
 
-            btnChangeSeat.IsEnabled = isEnabled;
-            btnAddPassenger.IsEnabled = isEnabled;
-            btnDeletePassenger.IsEnabled = isEnabled;
+                btnChangeSeat.IsEnabled = isEnabled;
+                btnAddPassenger.IsEnabled = isEnabled;
+                btnDeletePassenger.IsEnabled = isEnabled;
+
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.throwError(MethodInfo.GetCurrentMethod(), ex);
+            }
         }
     }
 }

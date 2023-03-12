@@ -29,7 +29,7 @@ namespace AirlineReservationSystem
 
         public override string ToString()
         {
-            return AircraftType;
+            return AircraftType + " - " + FlightNumber;
         }
     }
 }

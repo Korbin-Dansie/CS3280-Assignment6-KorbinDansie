@@ -453,7 +453,7 @@
                 <Label x:Name="lbChooseFlight" Content="Choose Flight:" Style="{DynamicResource LabelStylePassengerInformation}"/>
                 <Label x:Name="lbChoosePassenger" Content="Choose Passenger:" Grid.Row="1" Style="{DynamicResource LabelStylePassengerInformation}"/>
                 <Label x:Name="lbPassengersSeat" Content="Passenger's Seat:" Grid.Row="2" Style="{DynamicResource LabelStylePassengerInformation}"/>
-                <ComboBox Style="{DynamicResource ComboBoxStylePassengerInformation}" x:Name="cbFlight" Grid.Column="1">
+                <ComboBox Style="{DynamicResource ComboBoxStylePassengerInformation}" x:Name="cbFlight" Grid.Column="1" SelectionChanged="cbFlight_SelectionChanged">
                 </ComboBox>
                 <ComboBox x:Name="cbPassenger" Grid.Column="1" Grid.Row="1" Style="{DynamicResource ComboBoxStylePassengerInformation}"/>
                 <Rectangle x:Name="rectSeat" Grid.Column="1" Grid.Row="2" Stroke="Black" Width="{Binding ActualHeight, ElementName=rectSeat, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=lbPassengersSeat, Mode=OneWay}"/>

@@ -14,46 +14,40 @@ namespace AirlineReservationSystem
     internal static class ErrorHandling
     {
         /// <summary>
-        /// Handel the errro
+        /// Handel Errors
         /// </summary>
-        /// <param name="SClass"></param>
-        /// <param name="sMethod"></param>
-        /// <param name="sMessage"></param>
-        public static void handelError(string SClass, string sMethod, string sMessage)
+        /// <param name="method">MethodInfo.GetCurrentMethod()</param>
+        /// <param name="ex"></param>
+        public static void handelError(MethodBase method, Exception ex)
         {
-            MessageBox.Show(SClass + "." + sMethod + "->" + sMessage);
+            string message = getString(method, ex);
+            MessageBox.Show(message);
             try
             {
                 System.IO.File.AppendAllText(Environment.CurrentDirectory + @"\Resources\Error\Error.txt",
-                Environment.NewLine + "HandleError Exception: " + SClass + "." + sMethod + "->" + sMessage);
+                "HandleError Exception: " + Environment.NewLine  + message);
             }
-            catch(Exception ex)
+            catch(Exception execption)
             {
                 ; // If we could not write to the text file do nothing
             }
         }
 
-        public static void throwError(string declaringType, string name, string message)
+        /// <summary>
+        /// Throw a new error
+        /// </summary>
+        /// <param name="method">MethodInfo.GetCurrentMethod()</param>
+        /// <param name="ex"></param>
+        /// <exception cref="Exception"></exception>
+        public static void throwError(MethodBase method, Exception ex)
         {
-            /*
-             MethodInfo.GetCurrentMethod().DeclaringType.Name.ToString(), MethodInfo.GetCurrentMethod().Name, ex.Message
-            */
-            if (declaringType == null)
-            {
-                declaringType = String.Empty;
-            }
-            if(name == null)
-            {
-                name = String.Empty;
-            }
-            if(message == null)
-            {
-                message = String.Empty;
-            }
+            //throw new Exception(declaringType + "." + name + "->" + Environment.NewLine + message);
+            throw new Exception(getString(method, ex));
+        }
 
-            throw new Exception(declaringType + "." + name + "->" + Environment.NewLine + message);
-            //throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name.ToString() + "." +
-            //    MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
+        private static string getString(MethodBase method, Exception ex)
+        {
+            return method.DeclaringType.Name.ToString() + "." + method.Name + "->" + Environment.NewLine + ex.Message;
         }
     }
 }

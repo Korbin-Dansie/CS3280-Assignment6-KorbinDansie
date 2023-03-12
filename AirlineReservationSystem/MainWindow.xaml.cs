@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -95,8 +96,29 @@ namespace AirlineReservationSystem
             {
                 toggleFlightCanvases(false);
             }
+
+            try
+            {
+                throwError();
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.handelError(MethodInfo.GetCurrentMethod().DeclaringType.Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
+        private void throwError()
+        {
+            try
+            {
+                Passenger p = new Passenger();
+                p.throwError();
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.throwError(ex);
+            }
+        }
         /// <summary>
         /// Toggle enable on all UI components exept for choose flight
         /// </summary>

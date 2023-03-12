@@ -8,5 +8,9 @@ namespace AirlineReservationSystem.Resources
 {
     internal class Passenger
     {
+        public void throwError()
+        {
+            throw new NotImplementedException("Help");
+        }
     }
 }

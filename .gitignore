@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+AirlineReservationSystem/Resources/DataBase/ReservationSystem.ldb
+AirlineReservationSystem/Resources/DataBase/ReservationSystem.mdb
+AirlineReservationSystem/Resources/DataBase/ReservationSystem.mdb

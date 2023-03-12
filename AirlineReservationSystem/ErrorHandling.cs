@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Xml.Linq;
 
 namespace AirlineReservationSystem
 {
@@ -17,13 +21,36 @@ namespace AirlineReservationSystem
         /// <param name="sMessage"></param>
         public static void handelError(string SClass, string sMethod, string sMessage)
         {
-            System.IO.File.AppendAllText("C:\\" + Directory.GetCurrentDirectory() + @"\Resources\Error\Error.txt", Environment.NewLine +
-                             "HandleError Exception: " + SClass + "." + sMethod + "->" + sMessage);
+            MessageBox.Show(SClass + "." + sMethod + "->" + sMessage);
+            try
+            {
+                System.IO.File.AppendAllText(Environment.CurrentDirectory + @"\Resources\Error\Error.txt",
+                Environment.NewLine + "HandleError Exception: " + SClass + "." + sMethod + "->" + sMessage);
+            }
+            catch(Exception ex)
+            {
+                ; // If we could not write to the text file do nothing
+            }
         }
 
-        public static void throwError()
+        public static void throwError(string declaringType, string name, string message)
         {
+            if(declaringType == null)
+            {
+                declaringType = String.Empty;
+            }
+            if(name == null)
+            {
+                name = String.Empty;
+            }
+            if(message == null)
+            {
+                message = String.Empty;
+            }
 
+            throw new Exception(declaringType + "." + name + "->" + Environment.NewLine + message);
+            //throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name.ToString() + "." +
+            //    MethodInfo.GetCurrentMethod().Name + "->" + ex.Message);
         }
     }
 }

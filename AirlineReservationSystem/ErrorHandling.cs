@@ -18,7 +18,7 @@ namespace AirlineReservationSystem
         /// </summary>
         /// <param name="method">MethodInfo.GetCurrentMethod()</param>
         /// <param name="ex"></param>
-        public static void handelError(MethodBase method, Exception ex)
+        public static void handleError(MethodBase method, Exception ex)
         {
             string message = getString(method, ex);
             MessageBox.Show(message);

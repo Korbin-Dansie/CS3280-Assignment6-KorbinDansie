@@ -469,7 +469,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="btnChangeSeat" Content="Change Seat" Style="{DynamicResource ButtonStyleControls}" Height="26" Width="162"/>
-            <Button x:Name="btnAddPassenger" Content="Add Passenger" Style="{DynamicResource ButtonStyleControls}" Height="25" Width="162" Grid.Row="1"/>
+            <Button x:Name="btnAddPassenger" Content="Add Passenger" Style="{DynamicResource ButtonStyleControls}" Height="25" Width="162" Grid.Row="1" Click="btnAddPassenger_Click"/>
             <Button x:Name="btnDeletePassenger" Grid.Column="2" Content="Delete Passenger" Grid.Row="1" Style="{DynamicResource ButtonStyleControls}" Height="25" Width="162"/>
         </Grid>
         <GroupBox x:Name="gbColorKey" Grid.Column="1" Header="Color Key" Grid.Row="2" Margin="{DynamicResource GroupBoxMargin1}">

@@ -32,6 +32,8 @@ namespace AirlineReservationSystem
         /// </summary>
         FlightManager flightManager;
 
+        AddPassengerWindow addPassengerWindow;
+
         public MainWindow()
         {
             try
@@ -39,6 +41,13 @@ namespace AirlineReservationSystem
                 InitializeComponent();
                 // Disable UI
                 toggleUIComponents(false);
+
+                //MAKE SURE TO INCLUDE THIS LINE OR THE APPLICATION WILL NOT CLOSE
+                //BECAUSE THE WINDOWS ARE STILL IN MEMORY
+                Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+
+                //Create new windows
+                addPassengerWindow = new AddPassengerWindow();
 
                 db = new clsDataAccess();
 
@@ -58,7 +67,7 @@ namespace AirlineReservationSystem
             }
             catch(Exception ex)
             {
-                ErrorHandling.handelError(MethodInfo.GetCurrentMethod(), ex);
+                ErrorHandling.handleError(MethodInfo.GetCurrentMethod(), ex);
             }
         }
 
@@ -126,7 +135,7 @@ namespace AirlineReservationSystem
             }
             catch(Exception ex)
             {
-                ErrorHandling.handelError(MethodInfo.GetCurrentMethod(), ex);
+                ErrorHandling.handleError(MethodInfo.GetCurrentMethod(), ex);
             }
         }
 
@@ -149,6 +158,32 @@ namespace AirlineReservationSystem
             {
                 ErrorHandling.throwError(MethodInfo.GetCurrentMethod(), ex);
             }
+        }
+
+        /// <summary>
+        /// Add a passenger
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddPassenger_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            relocateWindow(addPassengerWindow, this);
+            addPassengerWindow.ShowDialog();
+            relocateWindow(this, addPassengerWindow);
+            this.Show();
+        }
+
+
+        /// <summary>
+        /// Relocate the windows to match
+        /// </summary>
+        /// <param name="toWindow"></param>
+        /// <param name="fromWindow"></param>
+        private void relocateWindow(Window toWindow, Window fromWindow)
+        {
+            toWindow.Left = fromWindow.Left;
+            toWindow.Top = fromWindow.Top;
         }
     }
 }

@@ -55,7 +55,7 @@ namespace AirlineReservationSystem
             }
             catch (Exception ex)
             {
-                ErrorHandling.handelError(MethodInfo.GetCurrentMethod(), ex);
+                ErrorHandling.handleError(MethodInfo.GetCurrentMethod(), ex);
                 return null;
             }
         }

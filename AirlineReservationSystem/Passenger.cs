@@ -62,7 +62,7 @@ namespace AirlineReservationSystem
         }
 
         /// <summary>
-        /// Returns fist and last name
+        /// Returns first and last name
         /// </summary>
         /// <returns></returns>
         public override string ToString()

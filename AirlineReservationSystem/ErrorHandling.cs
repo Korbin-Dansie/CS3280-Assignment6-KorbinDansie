@@ -14,7 +14,7 @@ namespace AirlineReservationSystem
     internal static class ErrorHandling
     {
         /// <summary>
-        /// Handel Errors
+        /// Handle Errors
         /// </summary>
         /// <param name="method">MethodInfo.GetCurrentMethod()</param>
         /// <param name="ex"></param>
@@ -45,6 +45,12 @@ namespace AirlineReservationSystem
             throw new Exception(getString(method, ex));
         }
 
+        /// <summary>
+        /// The string of how the error is displayed
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="ex"></param>
+        /// <returns></returns>
         private static string getString(MethodBase method, Exception ex)
         {
             return method.DeclaringType.Name.ToString() + "." + method.Name + "->" + Environment.NewLine + ex.Message;

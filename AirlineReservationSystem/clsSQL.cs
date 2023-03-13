@@ -10,6 +10,11 @@ namespace AirlineReservationSystem
 {
     internal class clsSQL
     {
+        /// <summary>
+        /// SQL statment to get flights 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string GetFlights()
         {
             try
@@ -24,6 +29,12 @@ namespace AirlineReservationSystem
             }
         }
 
+        /// <summary>
+        /// SQL statment to get passengers
+        /// </summary>
+        /// <param name="sFlightID"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string GetPassengers(string sFlightID)
         {
             try

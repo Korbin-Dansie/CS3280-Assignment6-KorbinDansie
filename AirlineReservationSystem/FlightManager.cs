@@ -11,17 +11,34 @@ namespace AirlineReservationSystem
 {
     internal class FlightManager
     {
+        /// <summary>
+        /// A list of flights
+        /// </summary>
         private List<Flight> flights = new List<Flight>();
 
+        /// <summary>
+        /// A list of flights
+        /// </summary>
         public List<Flight> Flights { get { return flights; } private set { flights = value; }}
 
+        /// <summary>
+        /// The database
+        /// </summary>
         private clsDataAccess db;
 
+        /// <summary>
+        /// Create a new FlightManager
+        /// </summary>
+        /// <param name="db">The database</param>
         public FlightManager(clsDataAccess db)
         {
             this.db = db;
         }
 
+        /// <summary>
+        /// Return the list of flights
+        /// </summary>
+        /// <returns></returns>
         public List<Flight> getFlights()
         {
             try

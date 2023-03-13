@@ -22,7 +22,14 @@ namespace AirlineReservationSystem
     {
         public AddPassengerWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.handleError(MethodInfo.GetCurrentMethod(), ex);
+            }
         }
 
         /// <summary>
@@ -32,14 +39,38 @@ namespace AirlineReservationSystem
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.handleError(MethodInfo.GetCurrentMethod(), ex);
+            }
         }
 
+        /// <summary>
+        /// Add the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.handleError(MethodInfo.GetCurrentMethod(), ex);
+            }
         }
 
+        /// <summary>
+        /// Change what happens when the window closes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try

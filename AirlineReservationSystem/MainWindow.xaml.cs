@@ -32,6 +32,9 @@ namespace AirlineReservationSystem
         /// </summary>
         FlightManager flightManager;
 
+        /// <summary>
+        /// A list of passengers
+        /// </summary>
         AddPassengerWindow addPassengerWindow;
 
         public MainWindow()
@@ -167,11 +170,18 @@ namespace AirlineReservationSystem
         /// <param name="e"></param>
         private void btnAddPassenger_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            relocateWindow(addPassengerWindow, this);
-            addPassengerWindow.ShowDialog();
-            relocateWindow(this, addPassengerWindow);
-            this.Show();
+            try
+            {
+                this.Hide();
+                relocateWindow(addPassengerWindow, this);
+                addPassengerWindow.ShowDialog();
+                relocateWindow(this, addPassengerWindow);
+                this.Show();
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.handleError(MethodInfo.GetCurrentMethod(), ex);
+            }
         }
 
 
@@ -182,8 +192,15 @@ namespace AirlineReservationSystem
         /// <param name="fromWindow"></param>
         private void relocateWindow(Window toWindow, Window fromWindow)
         {
-            toWindow.Left = fromWindow.Left;
-            toWindow.Top = fromWindow.Top;
+            try
+            {
+                toWindow.Left = fromWindow.Left;
+                toWindow.Top = fromWindow.Top;
+            }
+            catch(Exception ex)
+            {
+                ErrorHandling.throwError(MethodInfo.GetCurrentMethod(), ex);
+            }
         }
     }
 }
